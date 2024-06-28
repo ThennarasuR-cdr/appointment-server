@@ -1,6 +1,8 @@
+import dotenv from 'dotenv';
 import base64url from 'base64url';
 import { sha256 } from 'js-sha256';
 
+dotenv.config();
 const tokenEncryptionSecret = process.env.TOKEN_ENCRYPTION_SECRET;
 
 export const issueToken = (payload) => {
