@@ -1,17 +1,17 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import express from 'express';
 import mongoose from 'mongoose';
-import pingRouter from './routes/ping.js';
+import app from './app.js';
 
 const dbUrl = process.env.DB_URL;
 const port = process.env.PORT;
 
-const app = express();
 
-app.use(pingRouter);
-
-mongoose.connect(dbUrl);
+mongoose.connect(dbUrl).then(()=>{
+    console.log("Connection to DB successful");
+}).catch((err)=>{
+    console.log("Error connecting to DB", err);
+});
 
 app.listen(port, () => {
     console.log("App listening on PORT: ",port);

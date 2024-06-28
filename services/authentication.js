@@ -1,13 +1,6 @@
-import User from "../models/user"
+import User from "../models/user.js"
 
 const signUp = async (user) => {
-    const foundUser = await User.findOne({email:user.email});
-
-    if(foundUser){
-        console.error("User with email id "+user.email+" already exists");
-        return;
-    }
-
     await User.create({
         name: user.name,
         email: user.email,
@@ -15,4 +8,10 @@ const signUp = async (user) => {
     });
 };
 
-export {signUp};
+const userExists = async (email) => {
+    const foundUser = await User.findOne({email:email});
+
+    return !!foundUser;
+}
+
+export {signUp, userExists};
